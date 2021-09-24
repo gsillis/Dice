@@ -10,9 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    private var screen: View?
+
+    override func loadView() {
+        screen = View()
+        view = screen
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+//        view.backgroundColor = .red
     }
 }
 
