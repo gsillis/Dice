@@ -19,6 +19,12 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        screen?.delegate(delegate: self)
     }
 }
 
+extension ViewController: DiceScreenProtocol {
+    func rollButtonTapped() {
+        print("=========View Controller==========")
+    }
+}
