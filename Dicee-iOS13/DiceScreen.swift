@@ -8,8 +8,19 @@
 
 import UIKit
 
+// MARK: - protocol
+protocol DiceScreenProtocol: AnyObject {
+    func rollButtonTapped()
+}
+
 
 final class DiceScreen: UIView {
+
+    // MARK: - delegate
+
+    private weak var delegate: DiceScreenProtocol?
+
+    // MARK: - view
 
     private lazy var backgroundImage: UIImageView = {
         let backgroundImage = UIImageView()
@@ -52,9 +63,25 @@ final class DiceScreen: UIView {
         button.layer.backgroundColor = UIColor.red.cgColor
         button.layer.cornerRadius = 8
         button.titleLabel?.font = UIFont.systemFont(ofSize: 25)
+        button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
 
         return button
     }()
+
+    // MARK: - public func
+
+    func delegate(delegate: DiceScreenProtocol?) {
+        self.delegate = delegate
+    }
+
+    // MARK: - action button
+
+    @objc private func tappedButton() {
+        delegate?.rollButtonTapped()
+        print("=========camada de view=============")
+    }
+
+    // MARK: - init
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -66,6 +93,7 @@ final class DiceScreen: UIView {
     }
 }
 
+// MARK: - configSubview || configConstraint
 extension DiceScreen: ViewProtocol {
 
     func configSubview() {
@@ -98,7 +126,6 @@ extension DiceScreen: ViewProtocol {
             rollButton.centerXAnchor.constraint(equalTo: logoImage.centerXAnchor),
             rollButton.leadingAnchor.constraint(equalTo: backgroundImage.leadingAnchor, constant: 50),
             rollButton.trailingAnchor.constraint(equalTo: backgroundImage.trailingAnchor, constant: -50)
-
         ])
     }
 }
