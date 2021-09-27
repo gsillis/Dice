@@ -10,16 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    private var screen: View?
+    private var screen: DiceScreen?
 
     override func loadView() {
-        screen = View()
+        screen = DiceScreen()
         view = screen
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .red
     }
 }
 
